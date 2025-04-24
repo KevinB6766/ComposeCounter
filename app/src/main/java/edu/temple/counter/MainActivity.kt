@@ -1,26 +1,16 @@
 package edu.temple.counter
 
-import android.R.attr.text
-import android.R.attr.top
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -43,43 +33,37 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-
 fun Counter(modifier: Modifier = Modifier) {
-
-    // Use remember to hold the state of the counter
-
-    var count by remember { mutableIntStateOf(0) }
-
+    var count by remember { mutableStateOf(0) }
 
     Column(
-
         modifier = modifier.fillMaxSize(),
-
         verticalArrangement = Arrangement.Center,
-
         horizontalAlignment = Alignment.CenterHorizontally
-
     ) {
-
-        Button(
-            onClick = { count++ },
-            modifier = Modifier.padding(top = 16.dp)
-        ) {
-            Text(text = "↑")
+        Button(onClick = { count++ }) {
+            Image(
+                painter = painterResource(android.R.drawable.arrow_up_float),
+                contentDescription = "Up arrow"
+            )
         }
+
+        Spacer(modifier = Modifier.height(24.dp))
+
         Text(
-            text = "${count}",
+            text = "$count",
             fontSize = 192.sp
         )
-        Button(
-            onClick = { count-- },
-            modifier = Modifier.padding(top = 16.dp)
-        ) {
-            Text(text = " ↓")
+
+        Spacer(modifier = Modifier.height(24.dp))
+
+        Button(onClick = { count-- }) {
+            Image(
+                painter = painterResource(android.R.drawable.arrow_down_float),
+                contentDescription = "Down arrow"
+            )
         }
-
     }
-
 }
 
 @Preview(showBackground = true)
